@@ -63,7 +63,7 @@ impl Raii<ffi::Stmt> {
             ) };
         match result {
             ffi::SQL_SUCCESS => {
-                if indicator == ffi::SQL_NULL_DATA {
+                if indicator == ffi::SQL_NULL_DATA || (indicator as i32) == ffi::SQL_NULL_DATA as i32 {
                     Return::Success(None)
                 } else {
                     assert!(start_pos + indicator as usize <= buffer.len(), "no more data but indicatior outside of data buffer");
